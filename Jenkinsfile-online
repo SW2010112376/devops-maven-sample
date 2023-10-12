@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'jdk11 maven java'
+      label 'maven'
     }
   }
 
@@ -36,12 +36,12 @@ pipeline {
  
         stage ('build & push') {
             steps {
-                container ('jdk11 maven java') {
+                container ('maven') {
                     sh 'mvn clean package -DskipTests'
-                    sh 'alias docker=podman'
-                    sh 'podman ps'
+             //       sh 'alias docker=podman'
+             //       sh 'podman ps'
                     sh 'docker ps'
-                    sh 'ls ruoyi-auth/target'
+             //       sh 'ls ruoyi-auth/target'
                     sh 'docker build -f Dockerfile-online -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER .'
                     withCredentials([usernamePassword(passwordVariable : 'DOCKER_PASSWORD' ,usernameVariable : 'DOCKER_USERNAME' ,credentialsId : "$DOCKER_CREDENTIAL_ID" ,)]) {
                         sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
@@ -56,7 +56,7 @@ pipeline {
              branch 'master'
            }
            steps{
-                container ('jdk11 maven java') {
+                container ('maven') {
                    
                   
                   
@@ -72,7 +72,7 @@ pipeline {
           }
           steps {
             input(id: 'deploy-to-dev', message: 'deploy to dev?')
-            container ('jdk11 maven java') {
+            container ('maven') {
                 withCredentials([
                     kubeconfigFile(
                     credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
@@ -90,7 +90,7 @@ pipeline {
             }
           }
           steps {
-              container ('jdk11 maven java') {
+              container ('maven') {
                 input(id: 'release-image-with-tag', message: 'release image with tag?')
                   withCredentials([usernamePassword(credentialsId: "$GITHUB_CREDENTIAL_ID", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh 'git config --global user.email "kubesphere@yunify.com" '
@@ -111,7 +111,7 @@ pipeline {
           }
           steps {
             input(id: 'deploy-to-production', message: 'deploy to production?')
-            container ('jdk11 maven java') {
+            container ('maven') {
                 withCredentials([
                     kubeconfigFile(
                     credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
