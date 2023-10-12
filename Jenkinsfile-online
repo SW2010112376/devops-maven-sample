@@ -46,7 +46,7 @@ pipeline {
                     sh 'which docker'
               //      sh 'systemctl start docker'
              //       sh 'alias docker=podman'
-                    sh 'podman ps'
+              //      sh 'podman ps'
              //       sh 'docker ps'
              //       sh 'ls ruoyi-auth/target'
             //        sh 'service docker start'
