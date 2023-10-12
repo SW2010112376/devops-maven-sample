@@ -47,7 +47,7 @@ pipeline {
              //       sh 'sudo systemctl start docker'
              //       sh 'alias docker=podman'
              //       sh 'podman ps'
-             //       sh 'docker ps'
+                    sh 'docker ps'
              //       sh 'ls ruoyi-auth/target'
             //        sh 'service docker start'
                     sh 'docker build -f Dockerfile-online -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER .'
