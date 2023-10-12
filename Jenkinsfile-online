@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'mavenjdk11'
+      label 'jdk11 maven java'
     }
   }
 
@@ -36,7 +36,7 @@ pipeline {
  
         stage ('build & push') {
             steps {
-                container ('mavenjdk11') {
+                container ('jdk11 maven java') {
                     sh 'mvn clean package -DskipTests'
                     sh 'alias docker=podman'
                     sh 'podman ps'
@@ -56,7 +56,7 @@ pipeline {
              branch 'master'
            }
            steps{
-                container ('mavenjdk11') {
+                container ('jdk11 maven java') {
                    
                   
                   
@@ -72,7 +72,7 @@ pipeline {
           }
           steps {
             input(id: 'deploy-to-dev', message: 'deploy to dev?')
-            container ('mavenjdk11') {
+            container ('jdk11 maven java') {
                 withCredentials([
                     kubeconfigFile(
                     credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
@@ -90,7 +90,7 @@ pipeline {
             }
           }
           steps {
-              container ('mavenjdk11') {
+              container ('jdk11 maven java') {
                 input(id: 'release-image-with-tag', message: 'release image with tag?')
                   withCredentials([usernamePassword(credentialsId: "$GITHUB_CREDENTIAL_ID", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh 'git config --global user.email "kubesphere@yunify.com" '
@@ -111,7 +111,7 @@ pipeline {
           }
           steps {
             input(id: 'deploy-to-production', message: 'deploy to production?')
-            container ('mavenjdk11') {
+            container ('jdk11 maven java') {
                 withCredentials([
                     kubeconfigFile(
                     credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
