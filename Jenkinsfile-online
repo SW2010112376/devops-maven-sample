@@ -44,7 +44,7 @@ pipeline {
                     sh 'ls -alt /var/lib'
                     sh 'ls -alrt /var/run/'                    
                     sh 'which docker'
-                    sh 'systemctl start docker'
+              //      sh 'systemctl start docker'
              //       sh 'alias docker=podman'
              //       sh 'podman ps'
                     sh 'docker ps'
