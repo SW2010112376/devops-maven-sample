@@ -38,11 +38,14 @@ pipeline {
             steps {
                 container ('maven') {
                     sh 'mvn clean package -DskipTests'
-                    sh 'whoami'
-                    sh 'cat /etc/*-release'
-                    sh 'uname -a'
+                    // sh 'whoami' root
+                    // sh 'cat /etc/*-release' centos
+                    // sh 'uname -a' linux maven- 머시머시기
+                    sh 'ls -alt /var/lib | grep docker'
                     sh 'ls -alrt /var/run'
-                    sh 'systemctl status docker'
+                    sh 'ls -alrt /var/run/'
+                    sh 'find - name docker.sock'
+                   // sh 'systemctl status docker'
              //       sh 'sudo systemctl start docker'
              //       sh 'alias docker=podman'
              //       sh 'podman ps'
