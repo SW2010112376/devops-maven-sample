@@ -41,12 +41,12 @@ pipeline {
                     // sh 'whoami' root
                     // sh 'cat /etc/*-release' centos
                     // sh 'uname -a' linux maven- 머시머시기
-                    sh 'ls -alt /var/lib'
-                    sh 'ls -alrt /var/run/'                    
-                    sh 'which docker'
+             //       sh 'ls -alt /var/lib'
+             //       sh 'ls -alrt /var/run/'                    
+              //      sh 'which docker'
               //      sh 'systemctl start docker'
              //       sh 'alias docker=podman'
-              //      sh 'podman ps'
+                    sh 'podman ps'
              //       sh 'docker ps'
              //       sh 'ls ruoyi-auth/target'
             //        sh 'service docker start'
