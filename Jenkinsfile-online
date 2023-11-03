@@ -106,7 +106,7 @@ pipeline {
             }
           }
           steps {
-            input(id: 'deploy-to-production', message: 'deploy to production?')
+       //     input(id: 'deploy-to-production', message: 'deploy to production?')
             container ('maven') {
                 withCredentials([ kubeconfigFile(credentialsId: env.KUBECONFIG_CREDENTIAL_ID, variable: 'KUBECONFIG') ])
                 {
